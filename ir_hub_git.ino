@@ -242,7 +242,7 @@ void sendACStatus(){
 
     //IP Address
    strcpy(outTopic_status,outTopic);
-   strcat(outTopic_status,"pressure");
+   strcat(outTopic_status,"ip_address");
    WiFi.localIP().toString().toCharArray(msg,50);
    client.publish(outTopic_status,msg ); 
 
