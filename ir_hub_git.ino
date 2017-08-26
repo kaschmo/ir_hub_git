@@ -1,7 +1,8 @@
 /*
- * Combined IR Sender and Receiver
+ * Hub to translate MQTT messages into IR commands for Ulisse Argo DCI AC
  * Also PubSubClient for MQTT relay
  * BME280 for P,H,T
+ * Copyright K.Schmolders 08/2017
  */
 
 #include "wifi_credentials.h"
@@ -50,6 +51,7 @@ const char* mqtt_id = "ac_argo";
 #define SEALEVELPRESSURE_HPA (1013.25)
 Adafruit_BME280 bme280; // I2C
 float bme280_temperature, bme280_pressure, bme280_humidity, bme280_height;
+float bme280_temp_offset = 1.5;
 
 //OTA
 ESP8266WebServer httpServer(80);
@@ -274,7 +276,7 @@ void reconnect() {
 }
 
 void update_sensors() {
-  bme280_temperature=bme280.readTemperature(); //C
+  bme280_temperature=bme280.readTemperature()-bme280_temp_offset; //C
   bme280_pressure=bme280.readPressure() / 100.0F; //in hPA
   bme280_humidity=bme280.readHumidity(); //%
   bme280_height=bme280.readAltitude(SEALEVELPRESSURE_HPA); //m

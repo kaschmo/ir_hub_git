@@ -1,5 +1,7 @@
 # ir_hub_git
 ESP8266 based IR hub to connect to openHAB. 
+Translates MQTT commands to IR commands for AC (Argo Ulisse)
+Transmits Sensor Values from BME280
 Designed for Sonoff Relay
 
 Sonoff PINs from reset button downwards
